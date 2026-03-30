@@ -16,28 +16,22 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'InputTodo',
-  data() {
-    return { todo: '' };
-  },
-  methods: {
-    addTodoHanlder() {
-      // 할일이 3글자 이상인 경우에만
-      if (this.todo.length >= 3) {
-        // 부모 컴포넌트에 이벤트 전달(방출)
-        this.$emit('addTodo', this.todo);
-        this.todo = ''; // input 초기화
-        return; // 메소드 종료 == 밑에 코드 수행 X
-      }
+<script setup>
+import { ref } from 'vue';
 
+  const todo = ref('')
+  
+  const emit = defineEmits(['addTodo']);
+
+   const addTodoHanlder = () => {
+      if (todo.value.length >= 3) {
+        emit('addTodo', todo.value);
+        todo.value = '';
+        return; 
+      }
       alert('할 일은 3글자 이상 입력해주세요.');
-    },
-  },
-  emits: ['addTodo'],
-  // 이벤트 방출 검사
-  // -> 부모 컴포넌트로 전달되는 이벤트가
-  //    addTodo가 맞는지 검사
-};
+    };
+
 </script>
+
+
