@@ -15,14 +15,19 @@
   </div>
 </template>
 
-<script setup>
-  import TodoListItem from './TodoListItem.vue';
+<script>
+import TodoListItem from './TodoListItem.vue';
 
-  const props = defineProps({
-    todolist: {type: Array, required: true},
-    filterType: Number,
-  })
-
+export default {
+  name: 'TodoList',
+  props: ['todolist', 'filterType'],
+  components: { TodoListItem },
+  setup(props) {
+    return {
+      ...props,
+    };
+  },
+};
 </script>
 
 <!-- Options API

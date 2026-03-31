@@ -16,22 +16,28 @@
     </div>
   </div>
 </template>
-<script setup>
+<script>
 import { ref } from 'vue';
 
-  const todo = ref('')
-  
-  const emit = defineEmits(['addTodo']);
+export default {
+  name: 'InputTodo',
+  emits: ['addTodo'],
+  setup(props, { emit }) {
+    const todo = ref('');
 
-   const addTodoHanlder = () => {
+    const addTodoHanlder = () => {
       if (todo.value.length >= 3) {
         emit('addTodo', todo.value);
         todo.value = '';
-        return; 
+        return;
       }
       alert('할 일은 3글자 이상 입력해주세요.');
     };
 
+    return {
+      addTodoHanlder,
+      todo,
+    };
+  },
+};
 </script>
-
-

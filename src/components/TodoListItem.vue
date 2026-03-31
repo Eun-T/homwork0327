@@ -25,25 +25,30 @@
   </li>
 </template>
 
-<script setup>
+<script>
 import { computed } from 'vue';
 
-const props = defineProps({
-  todoitem: { type: Object, required: true },
-  filterType: Number,
-});
+export default {
+  name: 'TodoListItem',
+  props: ['todoitem', 'filterType'],
 
-const isVisible = computed(() => {
-  if (props.filterType == 0) {
-    return true;
-  } else if (props.filterType == 1 && props.todoitem.completed) {
-    return true;
-  } else if (props.filterType == 2 && !props.todoitem.completed) {
-    return true;
-  }
-  return false;
-});
+  setup(props, { emit }) {
+    const isVisible = computed(() => {
+      if (props.filterType == 0) {
+        return true;
+      } else if (props.filterType == 1 && props.todoitem.completed) {
+        return true;
+      } else if (props.filterType == 2 && !props.todoitem.completed) {
+        return true;
+      }
+      return false;
+    });
 
+    return {
+      isVisible
+    }
+  },
+};
 </script>
 
 <style scoped></style>

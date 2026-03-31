@@ -6,15 +6,21 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  todolist: { type: Array, required: true },
-});
+<script>
+export default {
+  name: 'TodoFilter',
+  props: ['todolist'],
+  emits: ['type-filter'],
 
-const emit = defineEmits(['type-filter']);
+  setup(props, { emit }) {
+    const typeFilter = (type) => {
+      emit('type-filter', type);
+    };
 
-const typeFilter = (type) => {
-  emit('type-filter', type);
+    return {
+      typeFilter,
+    };
+  },
 };
 </script>
 

@@ -6,19 +6,18 @@
 
 <script>
 export default {
-  name: "DeleteButton",
+  // name: 'DeleteButton',
   props: ['todoList'],
-  data() {
-    return {
+  setup(props, { emit }) {
+    const deleteTotal = () => {
+      emit('delete-total', props.todoList.length);
     };
-  },
-  methods: {
-    deleteTotal() {
-        this.$emit('delete-total',this.todoList.length)
-    }
+
+    return {
+      deleteTotal,
+    };
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
